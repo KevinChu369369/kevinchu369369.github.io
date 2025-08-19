@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Kevin Chu - Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+
+    <style>
+        /* Custom CSS for smooth scrolling and animations */
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .timeline-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+
+        .skill-bar.animate {
+            width: var(--skill-width);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dark ::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB;
+        }
+
+        @media screen and (max-width: 768px) {
+            .exp-ball {
+                display: none !important;
+            }
+
+            .exp-content {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-blue-600 dark:text-gray-300">
+                    Kevin Chu
+                </div>
+
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about"
+                        class="nav-link text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white transition-colors">About</a>
+                    <a href="#skills"
+                        class="nav-link text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white transition-colors">Skills</a>
+                    <a href="#experience"
+                        class="nav-link text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white transition-colors">Experience</a>
+                    <a href="#contact"
+                        class="nav-link text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle"
+                        class="p-2 rounded-lg bg-blue-600 dark:bg-gray-700 hover:bg-blue-300 dark:hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-moon text-white dark:hidden"></i>
+                        <i class="fas fa-sun text-white hidden dark:inline"></i>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobileMenuToggle" class="md:hidden p-2">
+                        <i class="fas fa-bars text-blue-600 dark:text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#about"
+                    class="block py-2 transition-colors text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white">About</a>
+                <a href="#skills"
+                    class="block py-2 transition-colors text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white">Skills</a>
+                <a href="#experience"
+                    class="block py-2 transition-colors text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white">Experience</a>
+                <a href="#contact"
+                    class="block py-2 transition-colors text-blue-600 hover:text-blue-300 dark:text-gray-300 dark:hover:text-white">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about"
+        class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-blue-900 pt-20 pb-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animate-fade-in">
+                <div class="mb-8">
+                    <div
+                        class="w-40 h-40 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center text-6xl text-white">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-blue-700 animate-slide-up dark:text-gray-300">
+                    Kevin Chu
+                </h1>
+
+                <p
+                    class="text-xl md:text-2xl text-blue-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto animate-slide-up ">
+                    A backend programmer
+                </p>
+            </div>
+
+            <div class="mt-16 animate-bounce-slow">
+                <a href="#skills" class="text-blue-600 dark:text-blue-400 text-2xl">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white dark:bg-gray-900" style="padding-top: 140px;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 fade-in-element text-blue-700 dark:text-gray-300">
+                    Technical Skills</h2>
+                <div class="w-24 h-1 bg-blue-600 dark:bg-gray-300 mx-auto mb-8 fade-in-element"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 fade-in-element">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-code text-4xl text-blue-600 dark:text-blue-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-blue-700 dark:text-gray-300">
+                            Languages</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">PHP</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">JavaScript</span>
+                            </div>
+                        </div>
+
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">React Native(Few experience)</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">C# (Few Experience)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frameworks & Tools -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 fade-in-element">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-tools text-4xl text-purple-600 dark:text-purple-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-blue-700 dark:text-gray-300">Frameworks/Libraries & Database
+                        </h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">Bootstrap</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">Materialize CSS</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">MySQL</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">JQuery</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">Tailwind CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Others -->
+                <div
+                    class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-2 fade-in-element">
+                    <div class="text-center mb-6">
+                        <!--<i class="fa-solid fa-sliders"></i>-->
+                        <i class="fas fa-sliders text-4xl text-green-600 dark:text-green-400 mb-4"></i>
+                        <h3 class="text-2xl font-bold text-blue-700 dark:text-gray-300">Others</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">PHP Smarty Template</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">Bitbucket & Github</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="flex justify-between mb-2 text-blue-600 dark:text-gray-300">
+                                <span class="font-semibold">Apache(Few Experience)</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-blue-50 dark:bg-gray-800" style="padding-top: 140px;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 fade-in-element text-blue-700 dark:text-gray-300">Work
+                    Experience</h2>
+                <div class="w-24 h-1 bg-blue-600 dark:bg-gray-300 mx-auto mb-8 fade-in-element "></div>
+                <p class="text-xl text-blue-600 dark:text-gray-300 max-w-3xl mx-auto fade-in-element">
+                    My professional journey in backend web development
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- Timeline Line -->
+                <div class="relative">
+                    <div
+                        class="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-blue-200 dark:bg-gray-300">
+                    </div>
+
+                    <div class="timeline-item mb-16 flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-8 order-2 md:order-1"></div>
+
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-purple-600 text-white rounded-full border-4 border-white dark:border-gray-800 relative z-10 mx-auto md:mx-0 order-1 md:order-2 exp-ball">
+
+                        </div>
+
+                        <div class="md:w-1/2 md:pl-8 order-3 exp-content">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Apr 2023 - Dec 2024</span>
+                                    <i class="fas fa-laptop-code text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Analyst Programmer</h3>
+                                <h4 class="text-lg mb-4 opacity-90">Healthology Biosciences Ltd</h4>
+                                <p class="leading-relaxed">
+                                    Developed and maintained inHouse web applications
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">PHP</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">MySQL</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">JavaScript</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">HTML & CSS</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">Jquery</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-16 flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-8 md:text-right order-2 md:order-1 exp-content">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">May 2017 - Mar 2023</span>
+                                    <i class="fas fa-laptop-code text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Web Programmer</h3>
+                                <h4 class="text-lg mb-4 opacity-90">Healthology Biosciences Ltd</h4>
+                                <p class="leading-relaxed">
+                                    Developed and maintained inHouse web applications
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">PHP</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">MySQL</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">JavaScript</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">HTML & CSS</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">Jquery</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">React Native</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-indigo-600 text-white rounded-full border-4 border-white dark:border-gray-800 relative z-10 mx-auto md:mx-0 order-1 md:order-2 exp-ball">
+                        </div>
+
+                        <div class="md:w-1/2 md:pl-8 order-3"></div>
+                    </div>
+
+                    <div class="timeline-item mb-16 flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-8 order-2 md:order-1"></div>
+
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-purple-600 text-white rounded-full border-4 border-white dark:border-gray-800 relative z-10 mx-auto md:mx-0 order-1 md:order-2 exp-ball">
+                        </div>
+
+                        <div class="md:w-1/2 md:pl-8 order-3 exp-content">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">April 2016 - November
+                                        2016</span>
+                                    <i class="fas fa-laptop-code text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Application Specialist</h3>
+                                <h4 class="text-lg mb-4 opacity-90">tForce Technologies Ltd</h4>
+                                <p class="leading-relaxed">
+                                    Developed and maintained web applications with SharePoint in asp.net web
+                                    application.
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">ASP.NET</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">MSSQL</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">JavaScript</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">HTML & CSS</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">Jquery</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item mb-16 flex flex-col md:flex-row items-start">
+                        <div class="md:w-1/2 md:pr-8 md:text-right order-2 md:order-1 exp-content">
+                            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm bg-white/20 px-3 py-1 rounded-full">Sept 2012 - April
+                                        2016</span>
+                                    <i class="fas fa-graduation-cap text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Programmer</h3>
+                                <h4 class="text-lg mb-4 opacity-90">Castco Testing Centre Ltd</h4>
+                                <p class="leading-relaxed">
+                                    Started my professional journey building web applications and few handware support.
+                                </p>
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">PHP</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">MySQL</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">JavaScript</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">HTML & CSS</span>
+                                    <span class="bg-white/20 px-2 py-1 rounded text-sm">Jquery</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-blue-600 text-white rounded-full border-4 border-white dark:border-gray-800 relative z-10 mx-auto md:mx-0 order-1 md:order-2 exp-ball">
+
+                        </div>
+
+                        <div class="md:w-1/2 md:pl-8 order-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-blue-900"
+        style="padding-top: 140px;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 fade-in-element text-blue-600 dark:text-gray-300"><i
+                        class="fas fa-paper-plane mr-3"></i>Contact Me</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="fade-in-element">
+                    <div class="space-y-6">
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                            <div
+                                class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-blue-600 dark:text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-700 dark:text-gray-300">Email</h4>
+                                <a href="mailto:kevinchu369369@gmail.com"
+                                    class="text-gray-600 dark:text-gray-300 text-blue-600">kevinchu369369@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                            <div
+                                class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                                <i class="fab fa-github text-gray-600 dark:text-gray-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-700 dark:text-gray-300">GitHub</h4>
+                                <a href="https://github.com/KevinChu369369/" class="text-gray-600 dark:text-gray-300"
+                                    target="_blank">https://github.com/KevinChu369369/</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 dark:bg-black text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+
+
+                <div class="border-gray-800 pt-8">
+                    <p class="text-gray-500">
+                        ©<span id="display-year"></span> Kevin Chu Portfolio.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        $(document).ready(function () {
+            // Dark Mode Toggle
+            const darkModeToggle = $('#darkModeToggle');
+            const html = $('html');
+
+            // Check for saved theme preference or default to system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                html.addClass('dark');
+            }
+
+            darkModeToggle.click(function () {
+                html.toggleClass('dark');
+                const isDark = html.hasClass('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // Mobile Menu Toggle
+            $('#mobileMenuToggle').click(function () {
+                $('#mobileMenu').toggleClass('hidden');
+            });
+
+            // Smooth Scrolling for Navigation Links with increased offset
+            $('a[href^="#"]').click(function (e) {
+                e.preventDefault();
+                const target = $($(this).attr('href'));
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 100
+                    }, 0);
+                    $('#mobileMenu').addClass('hidden');
+                }
+            });
+
+            // Intersection Observer for Animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = $(entry.target);
+
+                        // Timeline items animation
+                        if (element.hasClass('timeline-item')) {
+                            element.addClass('animate');
+                        }
+
+                        // Fade in elements
+                        if (element.hasClass('fade-in-element')) {
+                            element.addClass('animate-fade-in');
+                        }
+
+                        // Skill bars animation
+                        if (element.find('.skill-bar').length) {
+                            element.find('.skill-bar').addClass('animate');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements
+            $('.timeline-item, .fade-in-element, .skill-item').each(function () {
+                observer.observe(this);
+            });
+
+            // Add some interactive hover effects
+            $('.skill-item').hover(
+                function () {
+                    $(this).find('.skill-bar').css('transform', 'scaleY(1.2)');
+                },
+                function () {
+                    $(this).find('.skill-bar').css('transform', 'scaleY(1)');
+                }
+            );
+
+            const currentYear = new Date().getFullYear();
+            $('#display-year').text(currentYear);
+        });
+    </script>
+</body>
+
+</html>
